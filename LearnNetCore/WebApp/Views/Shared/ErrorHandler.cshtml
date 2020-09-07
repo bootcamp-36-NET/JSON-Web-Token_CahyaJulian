@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewData["Title"] = "ErrorHandler";
+    Layout = "~/Views/Login/Login.cshtml";
+}
+
+<h1>ERROR</h1>
+<body>
+    <div class="text-center">
+        <div class="error mx-auto">404</div>
+        <p class="lead text-gray-800">Page Not Found</p>
+        <h1>@ViewBag.msg</h1>
+        <a asp-action="index" asp-controller="Dashboard" style="font-size:medium"> Click here to login</a>
+
+    </div>
+</body>
+

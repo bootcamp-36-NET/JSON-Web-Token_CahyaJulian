@@ -1,0 +1,334 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BCrypt.Net;
+using LearnNetCore.Context;
+using LearnNetCore.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Net.Mail;
+using LearnNetCore.Verify;
+using System.Net;
+using System.Text;
+using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+using LearnNetCore.Repositories;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Microsoft.AspNetCore.Authentication;
+
+namespace LearnNetCore.Controllers
+{
+    //[Authorize]
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AccountController : ControllerBase
+    {
+        private readonly MyContext _context;
+        private readonly UserManager<User> _userManager;
+
+        //private readonly RoleManager<Role> _userRole;
+        private readonly IConfiguration _configuration;
+        private readonly ITokenRepository _tokenRepository;
+
+        SmtpClient client = new SmtpClient();
+        Verification verification = new Verification();
+        RandomGenerator randomGenerator = new RandomGenerator();
+        ServiceEmail serviceEmail = new ServiceEmail();
+
+
+        public AccountController(MyContext myContext,
+            UserManager<User> userManager, 
+            IConfiguration configuration)
+            //ITokenRepository tokenRepository) 
+        { 
+            _context = myContext;
+            _userManager = userManager;
+            _configuration = configuration;
+            //_tokenRepository = tokenRepository;
+        }
+
+        [HttpPost]
+        [Route("login")]
+        public IActionResult Login(UserViewModel userVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var pwd = userVM.Password;
+                var masuk = _context.UserRoles.Include("Role").Include("User").FirstOrDefault(m => m.User.Email == userVM.Email);
+                if (masuk == null)
+                {
+                    return BadRequest("Please use the existing email or register first");
+                }
+                else if (!BCrypt.Net.BCrypt.Verify(userVM.Password, masuk.User.PasswordHash))
+                {
+                    return BadRequest("Incorret password");
+                }
+                else if (pwd == null || pwd.Equals(""))
+                {
+                    return BadRequest("Please enter the password");
+                }
+                else
+                {
+                    var user = new UserViewModel();
+                    user.Id = masuk.User.Id;
+                    user.Username = masuk.User.UserName;
+                    user.Email = masuk.User.Email;
+                    user.Phone = masuk.User.PhoneNumber;
+                    user.RoleName = masuk.Role.Name;
+                    if (user.Username != null)
+                    {
+                        var Claims = new List<Claim>
+                        {
+                            new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
+                            new Claim("id", user.Id),
+                            new Claim("username", user.Username),
+                            new Claim("email", user.Email),
+                            new Claim("Phone", user.Phone),
+                            new Claim("RoleName", user.RoleName)
+                        };
+                        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+
+                        var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+                        var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], Claims, notBefore: DateTime.UtcNow, expires: DateTime.UtcNow.AddDays(1), signingCredentials: signIn);
+
+                        return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                        //return Challenge(new AuthenticationProperties { RedirectUri = "/dashboard" }, OpenIdConnectDefaults.AuthenticationScheme, new JwtSecurityTokenHandler().WriteToken(token));
+                    }
+                    return StatusCode(200, user);
+
+                }
+            }
+            return BadRequest(500);
+        }
+        [HttpPost]
+        [Route("verify")]
+        public async Task<IActionResult> VerifyCode(User userViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var getCode = _context.Users.Where(U => U.SecurityStamp == userViewModel.SecurityStamp).Any();
+                if (!getCode)
+                {
+                    return BadRequest(new { msg = "Verification proccess is failed. Please enter the invalid code" });
+                }
+                var userEmail = _context.UserRoles.Include("Role").Include("User").Where(U => U.User.Email == userViewModel.Email).FirstOrDefault();
+                var getUser = new UserViewModel();
+                userEmail.User.SecurityStamp = null;
+                userEmail.User.EmailConfirmed = true;
+                getUser.RoleName = userEmail.Role.Name;
+                getUser.Username = userEmail.User.UserName;
+                getUser.Id = userEmail.User.Id;
+                getUser.Email = userEmail.User.Email;
+                await _context.SaveChangesAsync();
+                return StatusCode(200, getUser);
+
+
+                //var getUserRole = _context.UserRoles.Include("User").Include("Role").SingleOrDefault(x => x.User.Email == userVM.Email);
+                //if (getUserRole == null)
+                //{
+                //    return NotFound( new { msg = "Please using the existing email or sign up first" });
+                //}
+                //else if (userVM.VerificationCode != getUserRole.User.SecurityStamp)
+                //{
+                //    return BadRequest(new { msg = "Incorrect code. Please try again" });
+                //}
+                //else
+                //{
+                //    var user = new UserViewModel();
+                //    user.Id = getUserRole.User.Id;
+                //    user.Username = getUserRole.User.UserName;
+                //    user.RoleName = getUserRole.Role.Name;
+                //    return StatusCode(200, user);
+                //}
+            }
+            return BadRequest(500);
+        }
+
+
+        [HttpPost]
+        [Route("register")]
+        public IActionResult Register(RegisterViewModel registerVM)
+        {
+            var theCode = randomGenerator.GenerateRandom().ToString();
+            serviceEmail.SendEmail(registerVM.Email, theCode);
+            var pwHashed = BCrypt.Net.BCrypt.HashPassword(registerVM.Password, 12);
+                var user = new User
+                {
+                    Email = registerVM.Email,
+                    PasswordHash = pwHashed,
+                    UserName = registerVM.Username,
+                    //NormalizedEmail = registerVM.Email.ToUpper(),
+                    EmailConfirmed = false,
+                    PhoneNumber = registerVM.Phone,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    SecurityStamp = theCode,
+                    AccessFailedCount = 0
+                };
+                _context.Users.AddAsync(user);
+                var role = new UserRole
+                {
+                    UserId = user.Id,
+                    RoleId = "2"
+                };
+                _context.UserRoles.AddAsync(role);
+                _context.SaveChanges();
+                return Ok("Registered successfully");
+
+        }
+        [Authorize(AuthenticationSchemes ="Bearer")]
+        // GET api/values
+        [HttpGet]
+        public async Task<List<UserViewModel>> GetAll()
+        {
+            List<UserViewModel> list = new List<UserViewModel>();
+
+            var getUserRole = await _context.UserRoles.Include("User").Include("Role").ToListAsync();
+            if (getUserRole.Count == 0)
+            {
+                return null;
+            }
+            foreach (var item in getUserRole)
+            {
+                var user = new UserViewModel()
+                {
+                    Id = item.User.Id,
+                    Username = item.User.UserName,
+                    Email = item.User.Email,
+                    Password = item.User.PasswordHash,
+                    Phone = item.User.PhoneNumber,
+                    RoleName = item.Role.Name,
+                };
+                list.Add(user);
+            }
+            return list;
+        }
+        [HttpGet("{id}")]
+        public UserViewModel GetID(string id)
+        {
+
+            var getData = _context.UserRoles.Include("User").Include("Role").SingleOrDefault(x => x.UserId == id);
+            if (getData == null || getData.Role == null || getData.User == null)
+            {
+                return null;
+            }
+            var user = new UserViewModel()
+            {
+                Id = getData.User.Id,
+                Username = getData.User.UserName,
+                Email = getData.User.Email,
+                Password = getData.User.PasswordHash,
+                Phone = getData.User.PhoneNumber,
+                RoleID = getData.Role.Id,
+                RoleName = getData.Role.Name
+            };
+            return user;
+        }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(string id)
+        {
+            var getId = _context.Users.Find(id);
+            _context.Users.Remove(getId);
+            _context.SaveChanges();
+            return Ok("Deleted succesfully");
+        }
+        [HttpPost]
+        public IActionResult Create(UserViewModel userVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var randomCode = randomGenerator.GenerateRandom();
+                var verifyMsg = " Verification code: " + randomCode + "\n\n"
+                          + "Enter this code to your application \n\n\n Thank you ";
+
+                client.Port = 587;
+                client.Host = "smtp.gmail.com";
+                client.EnableSsl = true;
+                client.Timeout = TimeSpan.FromMinutes(10).Minutes;
+                client.DeliveryMethod = SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.Credentials = new NetworkCredential(verification.EmailV, verification.PasswordV);
+
+                MailMessage mailMessage = new MailMessage("cjdeveloper123@gmail.com", userVM.Email, "Create Email", verifyMsg);
+                mailMessage.BodyEncoding = UTF8Encoding.UTF8;
+                mailMessage.DeliveryNotificationOptions = DeliveryNotificationOptions.OnFailure;
+                client.Send(mailMessage);
+                var pwHashed = BCrypt.Net.BCrypt.HashPassword(userVM.Password, 12);
+                var user = new User
+                {
+                    UserName = userVM.Username,
+                    Email = userVM.Email,
+                    SecurityStamp = randomCode.ToString(),
+                    PasswordHash = pwHashed,
+                    PhoneNumber = userVM.Phone,
+                    EmailConfirmed = false,
+                    PhoneNumberConfirmed = false,
+                    TwoFactorEnabled = false,
+                    LockoutEnabled = false,
+                    AccessFailedCount = 0,
+                };
+                _context.Users.Add(user);
+                var userRole = new UserRole
+                {
+                    UserId = user.Id,
+                    RoleId = "2"
+                };
+                _context.UserRoles.Add(userRole);
+                _context.SaveChanges();
+                return Ok("Successfully Created");
+            }
+            return BadRequest("Not Successfully");
+        }
+        [HttpPut("{id}")]
+        public IActionResult Update(string id, UserViewModel userVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var getData = _context.UserRoles.Include("Role").Include("User").SingleOrDefault(x => x.UserId == id);
+                getData.User.UserName = userVM.Username;
+                getData.User.Email = userVM.Email;
+                getData.User.PhoneNumber = userVM.Phone;
+                if (!BCrypt.Net.BCrypt.Verify(userVM.Password, getData.User.PasswordHash))
+                {
+                    getData.User.PasswordHash = BCrypt.Net.BCrypt.HashPassword(userVM.Password);
+                }
+                getData.RoleId = userVM.RoleID;
+
+                _context.UserRoles.Update(getData);
+                _context.SaveChanges();
+                return Ok("Update success");
+            }
+            return BadRequest("Something wrong");
+        }
+        //[HttpPost]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> RefreshToken(string authenticationToken, string refreshToken)
+        //{
+        //    var principal = _tokenRepository.GetPrincipalFromExpiredToken(authenticationToken);
+        //    var username = principal.Identity.Name; //this is mapped to the Name claim by default
+
+        //    var user = _context.Users.SingleOrDefault(u => u.UserName == username);
+        //    if (user == null || user.ConcurrencyStamp != refreshToken) return BadRequest();
+
+        //    var newJwtToken = _tokenService.GenerateAccessToken(principal.Claims);
+        //    var newRefreshToken = _tokenService.GenerateRefreshToken();
+
+        //    user.RefreshToken = newRefreshToken;
+        //    await _context.SaveChangesAsync();
+
+        //    return new ObjectResult(new
+        //    {
+        //        authenticationToken = newJwtToken,
+        //        refreshToken = newRefreshToken
+        //    });
+        //}
+    }
+}
