@@ -128,25 +128,6 @@ namespace LearnNetCore.Controllers
                 getUser.Email = userEmail.User.Email;
                 await _context.SaveChangesAsync();
                 return StatusCode(200, getUser);
-
-
-                //var getUserRole = _context.UserRoles.Include("User").Include("Role").SingleOrDefault(x => x.User.Email == userVM.Email);
-                //if (getUserRole == null)
-                //{
-                //    return NotFound( new { msg = "Please using the existing email or sign up first" });
-                //}
-                //else if (userVM.VerificationCode != getUserRole.User.SecurityStamp)
-                //{
-                //    return BadRequest(new { msg = "Incorrect code. Please try again" });
-                //}
-                //else
-                //{
-                //    var user = new UserViewModel();
-                //    user.Id = getUserRole.User.Id;
-                //    user.Username = getUserRole.User.UserName;
-                //    user.RoleName = getUserRole.Role.Name;
-                //    return StatusCode(200, user);
-                //}
             }
             return BadRequest(500);
         }
@@ -164,7 +145,6 @@ namespace LearnNetCore.Controllers
                     Email = registerVM.Email,
                     PasswordHash = pwHashed,
                     UserName = registerVM.Username,
-                    //NormalizedEmail = registerVM.Email.ToUpper(),
                     EmailConfirmed = false,
                     PhoneNumber = registerVM.Phone,
                     PhoneNumberConfirmed = false,
@@ -308,27 +288,5 @@ namespace LearnNetCore.Controllers
             }
             return BadRequest("Something wrong");
         }
-        //[HttpPost]
-        //[AllowAnonymous]
-        //public async Task<IActionResult> RefreshToken(string authenticationToken, string refreshToken)
-        //{
-        //    var principal = _tokenRepository.GetPrincipalFromExpiredToken(authenticationToken);
-        //    var username = principal.Identity.Name; //this is mapped to the Name claim by default
-
-        //    var user = _context.Users.SingleOrDefault(u => u.UserName == username);
-        //    if (user == null || user.ConcurrencyStamp != refreshToken) return BadRequest();
-
-        //    var newJwtToken = _tokenService.GenerateAccessToken(principal.Claims);
-        //    var newRefreshToken = _tokenService.GenerateRefreshToken();
-
-        //    user.RefreshToken = newRefreshToken;
-        //    await _context.SaveChangesAsync();
-
-        //    return new ObjectResult(new
-        //    {
-        //        authenticationToken = newJwtToken,
-        //        refreshToken = newRefreshToken
-        //    });
-        //}
     }
 }

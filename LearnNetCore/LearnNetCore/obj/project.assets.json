@@ -13044,11 +13044,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\LearnNetCore\\LearnNetCore\\LearnNetCore.csproj",
+      "projectUniqueName": "C:\\Users\\User\\source\\repos\\LearnNetCore\\JSON-Web-Token_CahyaJulian\\LearnNetCore\\LearnNetCore\\LearnNetCore.csproj",
       "projectName": "LearnNetCore",
-      "projectPath": "C:\\Users\\User\\source\\repos\\LearnNetCore\\LearnNetCore\\LearnNetCore.csproj",
+      "projectPath": "C:\\Users\\User\\source\\repos\\LearnNetCore\\JSON-Web-Token_CahyaJulian\\LearnNetCore\\LearnNetCore\\LearnNetCore.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\LearnNetCore\\LearnNetCore\\obj\\",
+      "outputPath": "C:\\Users\\User\\source\\repos\\LearnNetCore\\JSON-Web-Token_CahyaJulian\\LearnNetCore\\LearnNetCore\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",

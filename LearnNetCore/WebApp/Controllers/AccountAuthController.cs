@@ -149,41 +149,6 @@ namespace WebApp.Controllers
             }
             return Redirect("/verify");
         }
-
-
-            ////var email = HttpContext.Session.GetString("email");
-            //var contentData = new StringContent(emailnya, System.Text.Encoding.UTF8, "application/json");
-
-            //var resTask = client.PostAsync("account/Verify/" + verCode, contentData);
-
-            //var result = resTask.Result;
-            //if (result.IsSuccessStatusCode)
-            //{
-            //    var data = result.Content.ReadAsStringAsync().Result;
-            //    var json = JsonConvert.DeserializeObject(data).ToString();
-            //    var account = JsonConvert.DeserializeObject<UserViewModel>(json);
-            //    if (account.RoleName == "Admin" || account.RoleName == "Sales")
-            //    {
-            //        HttpContext.Session.SetString("id", account.Id);
-            //        HttpContext.Session.SetString("uname", account.Username);
-            //        HttpContext.Session.SetString("email", account.Email);
-            //        HttpContext.Session.SetString("lvl", account.RoleName);
-            //        if (account.RoleName == "Admin")
-            //        {
-            //            return Json(new { status = true, msg = "Login Successfully !", acc = "Admin" });
-            //        }
-            //        else
-            //        {
-            //            return Json(new { status = true, msg = "Login Successfully !", acc = "Sales" });
-            //        }
-            //    }
-            //    else
-            //    {
-            //        return Json(new { status = false, msg = "Username" });
-            //    }
-            //}
-
-            //return Json(result, new Newtonsoft.Json.JsonSerializerSettings());
         
         public async Task<Uri> CreateLoginAsync(UserViewModel loginVM, string verCode)
         {

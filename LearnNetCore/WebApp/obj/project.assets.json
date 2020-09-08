@@ -13089,11 +13089,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\User\\source\\repos\\LearnNetCore\\WebApp\\WebApp.csproj",
+      "projectUniqueName": "C:\\Users\\User\\source\\repos\\LearnNetCore\\JSON-Web-Token_CahyaJulian\\LearnNetCore\\WebApp\\WebApp.csproj",
       "projectName": "WebApp",
-      "projectPath": "C:\\Users\\User\\source\\repos\\LearnNetCore\\WebApp\\WebApp.csproj",
+      "projectPath": "C:\\Users\\User\\source\\repos\\LearnNetCore\\JSON-Web-Token_CahyaJulian\\LearnNetCore\\WebApp\\WebApp.csproj",
       "packagesPath": "C:\\Users\\User\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\User\\source\\repos\\LearnNetCore\\WebApp\\obj\\",
+      "outputPath": "C:\\Users\\User\\source\\repos\\LearnNetCore\\JSON-Web-Token_CahyaJulian\\LearnNetCore\\WebApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\User\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -13109,8 +13109,8 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\Users\\User\\source\\repos\\LearnNetCore\\LearnNetCore\\LearnNetCore.csproj": {
-              "projectPath": "C:\\Users\\User\\source\\repos\\LearnNetCore\\LearnNetCore\\LearnNetCore.csproj"
+            "C:\\Users\\User\\source\\repos\\LearnNetCore\\JSON-Web-Token_CahyaJulian\\LearnNetCore\\LearnNetCore\\LearnNetCore.csproj": {
+              "projectPath": "C:\\Users\\User\\source\\repos\\LearnNetCore\\JSON-Web-Token_CahyaJulian\\LearnNetCore\\LearnNetCore\\LearnNetCore.csproj"
             }
           }
         }

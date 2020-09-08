@@ -7,6 +7,7 @@ using AutoMapper;
 using LearnNetCore.Context;
 using LearnNetCore.Models;
 using LearnNetCore.Repositories;
+using LearnNetCore.Repositories.Data;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -39,7 +40,7 @@ namespace LearnNetCore
             services.AddDbContext<MyContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LearnNetCore")));
             services.AddIdentity<IdentityUser, IdentityRole>()
                     .AddEntityFrameworkStores<MyContext>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<DepartmentRepository>();
             services.AddIdentityCore<User>().AddEntityFrameworkStores<MyContext>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
