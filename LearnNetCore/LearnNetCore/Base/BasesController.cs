@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using LearnNetCore.Repositories.Interface;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearnNetCore.Base
 {
+    [Authorize(AuthenticationSchemes ="Bearer ")]
     [Route("api/[controller]")]
     [ApiController]
     public class BasesController<TEntity, TRepository> : ControllerBase
@@ -37,7 +39,7 @@ namespace LearnNetCore.Base
             }
             return BadRequest("Failed to input data. Please try again");
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<int>> Delete (int Id)
         {
             var delete = await _repository.Delete(Id);

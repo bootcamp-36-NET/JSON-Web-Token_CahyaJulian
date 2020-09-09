@@ -199,7 +199,6 @@ namespace WebApp.Controllers
                     if (data != "")
                     {
                         var handler = new JwtSecurityTokenHandler().ReadJwtToken(data);
-
                         var account = new UserViewModel {
                             Id = handler.Claims.Where(p => p.Type == "id").Select(s => s.Value).FirstOrDefault(),
                             Username = handler.Claims.Where(p => p.Type == "username").Select(s => s.Value).FirstOrDefault(),
@@ -208,12 +207,14 @@ namespace WebApp.Controllers
                             RoleName = handler.Claims.Where(p => p.Type == "RoleName").Select(s => s.Value).FirstOrDefault()
 
                     };
+
                         if (account.RoleName == "Admin" || account.RoleName == "Sales" || account.RoleName == "HR")
                         {
                             HttpContext.Session.SetString("id", account.Id);
                             HttpContext.Session.SetString("uname", account.Username);
                             HttpContext.Session.SetString("email", account.Email);
                             HttpContext.Session.SetString("lvl", account.RoleName);
+                            HttpContext.Session.SetString("JWToken", "Bearer " + data);
                             if (account.RoleName == "Admin")
                             {
                                 return Json(new { status = true, msg = "Login Successfully !", acc = "Admin" });

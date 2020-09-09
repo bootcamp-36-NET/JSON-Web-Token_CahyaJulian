@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using LearnNetCore.Base;
 using LearnNetCore.Models;
 using LearnNetCore.Repositories.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearnNetCore.Controllers
 {
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     [ApiController]
     public class DepartmentController : BasesController<Department, DepartmentRepository>
