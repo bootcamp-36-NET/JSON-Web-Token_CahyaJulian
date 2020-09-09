@@ -41,6 +41,7 @@ namespace LearnNetCore
             services.AddIdentity<IdentityUser, IdentityRole>()
                     .AddEntityFrameworkStores<MyContext>();
             services.AddScoped<DepartmentRepository>();
+            services.AddScoped<DivisionRepository>();
             services.AddIdentityCore<User>().AddEntityFrameworkStores<MyContext>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>

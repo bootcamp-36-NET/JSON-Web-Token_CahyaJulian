@@ -13027,6 +13027,7 @@
       "Microsoft.AspNetCore.Owin >= 2.1.1",
       "Microsoft.AspNetCore.Razor.Design >= 2.1.1",
       "Microsoft.AspNetCore.Routing >= 2.1.1",
+      "Microsoft.EntityFrameworkCore >= 2.1.1",
       "Microsoft.EntityFrameworkCore.Relational >= 2.1.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.1.1",
       "Microsoft.EntityFrameworkCore.Tools >= 2.1.1",
@@ -13107,6 +13108,10 @@
             "version": "[2.1.1, )"
           },
           "Microsoft.AspNetCore.Routing": {
+            "target": "Package",
+            "version": "[2.1.1, )"
+          },
+          "Microsoft.EntityFrameworkCore": {
             "target": "Package",
             "version": "[2.1.1, )"
           },

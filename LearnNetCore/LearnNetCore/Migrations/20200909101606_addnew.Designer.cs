@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LearnNetCore.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20200908030817_addRepoPattern")]
-    partial class addRepoPattern
+    [Migration("20200909101606_addnew")]
+    partial class addnew
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,31 @@ namespace LearnNetCore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("departments");
+                });
+
+            modelBuilder.Entity("LearnNetCore.Models.Division", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTimeOffset>("CreateDate");
+
+                    b.Property<DateTimeOffset>("DeleteDate");
+
+                    b.Property<int>("DepartmentId");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTimeOffset>("UpdateDate");
+
+                    b.Property<bool>("isDelete");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.ToTable("divisions");
                 });
 
             modelBuilder.Entity("LearnNetCore.Models.Role", b =>
@@ -107,6 +132,14 @@ namespace LearnNetCore.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("tb_m_userrole");
+                });
+
+            modelBuilder.Entity("LearnNetCore.Models.Division", b =>
+                {
+                    b.HasOne("LearnNetCore.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("LearnNetCore.Models.UserRole", b =>

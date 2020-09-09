@@ -15,6 +15,7 @@ namespace LearnNetCore.Context
         public DbSet<Role> Roles { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Department> departments { get; set; }
+        public DbSet<Division> divisions { get;set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

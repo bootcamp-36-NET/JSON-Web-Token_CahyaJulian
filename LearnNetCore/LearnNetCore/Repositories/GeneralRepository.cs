@@ -40,14 +40,14 @@ namespace LearnNetCore.Repositories
 
         }
 
-        public async Task<List<TEntity>> GetAll()
+        public virtual async Task<List<TEntity>> GetAll()
         {
-            var getAll = await _myContext.Set<TEntity>().ToListAsync();
-            if (!getAll.Count().Equals(0))
-            {
+            var getAll = await _myContext.Set<TEntity>().Where(D => D.isDelete == false).ToListAsync();
+            //if (!getAll.Count().Equals(0))
+            //{
                 return getAll;
-            }
-            return null;
+            //}
+            //return null;
 
         }
 

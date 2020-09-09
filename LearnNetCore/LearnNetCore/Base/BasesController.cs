@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LearnNetCore.Base
 {
-    [Authorize(AuthenticationSchemes ="Bearer ")]
     [Route("api/[controller]")]
     [ApiController]
     public class BasesController<TEntity, TRepository> : ControllerBase
