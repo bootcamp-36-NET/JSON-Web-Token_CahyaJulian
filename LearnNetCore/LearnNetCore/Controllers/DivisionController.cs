@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LearnNetCore.Controllers
 {
-    [Authorize(AuthenticationSchemes = "Bearer")]
+    //[Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     [ApiController]
     public class DivisionController : BasesController<Division, DivisionRepository>

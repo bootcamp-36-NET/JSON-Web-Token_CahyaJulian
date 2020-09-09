@@ -32,6 +32,7 @@
                             { title: "Division Name", data: "Name" },
                             { title: "Department Name", data: "Department.Name" },
                             {
+                                title: "Create Date",
                                 data: "CreateDate",
                                 render: function (jsonDate) {
                                     var date = moment(jsonDate).format("DD MMMM YYYY");
@@ -39,6 +40,7 @@
                                 }
                             },
                             {
+                                title: "Update Date",
                                 data: "UpdateDate",
                                 render: function (jsonDate) {
                                     if (!moment(jsonDate).isBefore('1000-01-01')) {
@@ -91,11 +93,21 @@ var formDivision = {
         //var div = new Object();
         //div.DepartmentId = myData;
         //div.Name = $('#name').val();
-
-        var divisionVMs = {
-            Name: document.getElementById("name").value,
-            DepartmentId: myData
-        }
+        //var dept = new Object();
+        //dept.Id = $('#divName').val();
+        //var id1 = dept.options[dept.selectedIndex].id;
+        //var myData = {
+        //    Id: id1
+        //};
+        var divisionVMs = new Object();
+        divisionVMs.Id = 0;
+        divisionVMs.Name = $('#name').val();
+        //divisionVMs.Department = myData;
+        divisionVMs.DepartmentId = myData.Id;
+        //var divisionVMs = {
+        //    Name: document.getElementById("name").value,
+        //    DepartmentId: myData
+        //};
         console.log(divisionVMs)
         $.ajax({
             url: '/DivisionWeb/InsertorupdateDivision',
@@ -130,9 +142,9 @@ var formDivision = {
             if (result.value) {
                 $.ajax({
                     url: '/DivisionWeb/Delete/' + id,
-                    method: 'post'
+                    type: 'post'
                 }).then((result) => {
-                    if (result.StatusCode == 200) {
+                    if (result.statusCode == 200 || result.statusCode == 201) {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',
@@ -150,9 +162,12 @@ var formDivision = {
         });
     }, editSaveDivision: function (editD) {
         editDiv = editD;
+        var myName = {
+            Name: document.getElementById("divName2").value
+        };
         var myData = {
             Name: document.getElementById("name2").value,
-            DepartmentName : document.getElementById("divName2").value
+            Department: myName
         }
         //console.log(myData);
         $.ajax({
@@ -174,17 +189,19 @@ var formDivision = {
             }
         });
     }, setEditData: function (editD) {
+        debugger;
         editDiv = editD; // new, supaya id bisa dibawa ke fungsi editForm
         //console.log(editD);
         $.ajax({
             url: '/DivisionWeb/GetById/' + editD,
             type: 'get',
-            contentType: 'application/json',
+            //contentType: 'application/json',
             dataType: 'json',
             success: function (res, status, xhr) {
                 if (xhr.status == 200 || xhr.status == 201) {
                     $('#name2').val(res.Name);
-                    $('#divName2').val(res.DepartmentName);
+                    selopDepartmentEdit.getAllDepartment(res.Name);
+                    //$('#divName2').val(res.Department.Name);
                     $('#exampleModalCenterEdit').modal('show');
                 } else {
 
@@ -262,7 +279,7 @@ var selopDepartmentEdit = {
     getAllDepartment: function (idAja) {
 
         $.ajax({
-            url: '/DepartmentWeb/LoadDepartment',
+            url: '/DepartmentWeb/LoadDepartments',
             method: 'get',
             contentType: 'application/json',
             success: function (res, status, xhr) {
@@ -291,4 +308,9 @@ var selopDepartmentEdit = {
         });
     }
 };
+$(document).ready(function () {
+    selopDepartment.getAllDepartment();
+    selopDepartmentEdit.getAllDepartment();
+    $(".select2").select2();
+});
 
