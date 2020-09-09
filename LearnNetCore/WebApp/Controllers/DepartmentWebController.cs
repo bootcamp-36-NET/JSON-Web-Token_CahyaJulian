@@ -41,15 +41,15 @@ namespace WebApp.Controllers
             return Json(departments, new Newtonsoft.Json.JsonSerializerSettings());
 
         }
-        public async Task<Uri> CreateDepartmentAsync(Department department)
-        {
-            HttpResponseMessage response = await httpClient.PostAsJsonAsync(
-                "Department", department);
-            response.EnsureSuccessStatusCode();
+        //public async Task<Uri> CreateDepartmentAsync(Department department)
+        //{
+        //    HttpResponseMessage response = await httpClient.PostAsJsonAsync(
+        //        "Department", department);
+        //    response.EnsureSuccessStatusCode();
 
-            // return URI of the created resource.
-            return response.Headers.Location;
-        }
+        //    // return URI of the created resource.
+        //    return response.Headers.Location;
+        //}
         public JsonResult InsertorupdateDepartment(Department departments, int id)
         {
             try
