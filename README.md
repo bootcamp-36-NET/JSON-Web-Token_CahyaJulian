@@ -10,4 +10,6 @@ JWT &amp; page error 404 ; etc
 2. Added profile / role. If the role's admin, can show the entire website (include : can show employee list + delete function).
 If sales, only profile employee.
 3. Admin and others have different profile page.
-4-. On progrees ( donut chart, - bar chart (using chart.js))
+4. On progrees:
+~ donut chart,
+~ bar chart (using chart.js)
