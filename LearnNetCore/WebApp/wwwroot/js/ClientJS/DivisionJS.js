@@ -1,4 +1,4 @@
-﻿var tableEmployee = {
+﻿var tableDivision = {
     create: function () {
         //debugger;
         // jika table tersebut datatable, maka clear and dostroy
@@ -79,12 +79,12 @@ var editDiv;
 $("#btn-edit").click(function () {
     formDivision.editSaveDivision(editDiv);
 });
-tableEmployee.create();
+tableDivision.create();
 
 var formDivision = {
     //Create
     saveForm: function () {
-        debugger;
+        //debugger;
         var b = document.getElementById("divName");
         var id1 = b.options[b.selectedIndex].id;
         var myData = {
@@ -118,7 +118,7 @@ var formDivision = {
             //data: JSON.stringify(dataDivision),
             success: function (res, status, xhr) {
                 if (xhr.status == 200 || xhr.status == 201) {
-                    tableEmployee.create();
+                    tableDivision.create();
                     //tableDivision.ajax.reload(null, false);
                     toastr.success('Data has been saved');
                     $('#exampleModalCenter').modal('hide');
@@ -152,7 +152,7 @@ var formDivision = {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                        tableEmployee.create();
+                        tableDivision.create();
                     } else {
                         Swal.fire('Error', 'Failed', 'error');
                     }
@@ -178,7 +178,7 @@ var formDivision = {
             data: JSON.stringify(myData),
             success: function (res, status, xhr) {
                 if (xhr.status == 200 || xhr.status == 201) {
-                    tableEmployee.create();
+                    tableDivision.create();
                     $('#exampleModalCenter').modal('hide');
                     toastr.success('Data has been modified.');
                 } else {
@@ -189,7 +189,7 @@ var formDivision = {
             }
         });
     }, setEditData: function (editD) {
-        debugger;
+        //debugger;
         editDiv = editD; // new, supaya id bisa dibawa ke fungsi editForm
         //console.log(editD);
         $.ajax({

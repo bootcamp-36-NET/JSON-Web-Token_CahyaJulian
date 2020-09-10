@@ -102,14 +102,14 @@ var formDepartment = {
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, I do!',
         }).then((result) => {
-            debugger;
+            //debugger;
             if (result.value) {
                 $.ajax({
                     url: '/DepartmentWeb/Delete/' + id,
                     //data: { id: id }
                     type: 'post'
                 }).then((result) => {
-                    debugger;
+                    //debugger;
                     if (result.statusCode == 200 || result.statusCode == 201) {
                         Swal.fire({
                             position: 'center',
@@ -127,7 +127,7 @@ var formDepartment = {
             };
         });
     }, editSaveDepartment: function (editD) {
-        debugger;
+        //debugger;
         editDiv = editD;
         var Dept = new Object();
         //Dept.Id = $('#id').val();

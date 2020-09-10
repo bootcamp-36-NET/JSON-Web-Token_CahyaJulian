@@ -26,7 +26,7 @@ namespace LearnNetCore.Controllers
         [HttpGet]
         public async Task<List<EmployeeVM>> GetAll()
         {
-            var getData = await this._context.employees.Include("Users").ToListAsync();
+            var getData = await this._context.employees.Include("Users").Where(Q => Q.isDelete == false).ToListAsync();
             List<EmployeeVM> list = new List<EmployeeVM>();
             foreach (var employee in getData)
             {
@@ -42,22 +42,6 @@ namespace LearnNetCore.Controllers
                 list.Add(emp);
             }
             return list;
-        }
-
-        [HttpGet("{id}")]
-        public EmployeeVM GetId(string id)
-        {
-            var getData = _context.employees.Include("Users").SingleOrDefault(x => x.Id == id);
-            EmployeeVM emp = new EmployeeVM()
-            {
-                EmployeeId = getData.Users.Id,
-                Username = getData.Users.UserName,
-                Phone = getData.Users.PhoneNumber,
-                CreateDate = getData.CreateDate,
-                UpdateDate = getData.UpdateDate,
-                DeleteDate = getData.DeleteDate
-            };
-            return emp;
         }
         [HttpDelete("{id}")]
         public IActionResult Delete(string id)

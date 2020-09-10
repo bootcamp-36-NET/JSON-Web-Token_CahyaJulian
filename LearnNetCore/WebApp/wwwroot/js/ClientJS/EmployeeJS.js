@@ -1,6 +1,5 @@
-﻿var tableEmployee = {
+﻿var tableDivision = {
     create: function () {
-        //debugger;
         // jika table tersebut datatable, maka clear and dostroy
         if ($.fn.DataTable.isDataTable('#MydataTable')) {
             // table yg sudah dibentuk menjadi datatable harus d rebuild lagi
@@ -56,7 +55,7 @@
                                 "info": false,
                                 render: function (data, type, row) {
                                     console.log(data);
-                                    return "<button class='btn btn-outline-danger' title='Delete' onclick=formDivision.setDeleteData('" + data.Id + "')><i class='fa fa-lg fa-trash'></i></button>"
+                                    return "<button class='btn btn-outline-danger' title='Delete' onclick=formDivision.setDeleteData('" + data.EmployeeId + "')><i class='fa fa-lg fa-trash'></i></button>"
                                 }
                             }
                         ]
@@ -70,11 +69,10 @@
         });
     }
 };
-tableEmployee.create();
+tableDivision.create();
 
 var formDivision = {
     setDeleteData: function (id) {
-        debugger;
         Swal.fire({
             title: 'Confirmation',
             text: "Do you want to delete this data?",
@@ -96,7 +94,7 @@ var formDivision = {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                        tableEmployee.create();
+                        tableDivision.create();
                     } else {
                         Swal.fire('Error', 'Failed', 'error');
                     }
@@ -105,10 +103,5 @@ var formDivision = {
             };
         });
     }
-};
-$(document).ready(function () {
-    //selopDepartment.getAllDepartment();
-    //selopDepartmentEdit.getAllDepartment();
-    //$(".select2").select2();
-});
+}
 
