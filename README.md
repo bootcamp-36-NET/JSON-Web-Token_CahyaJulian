@@ -7,6 +7,7 @@ JWT &amp; page error 404 ; etc
 2. Only admin who can access department and division pages
 3. After delete a data, do not show the value in the table
 - Request on Thrusday : 1. Added Employee
-2. Added profile / role. If the role's admin, can show the entire website.
+2. Added profile / role. If the role's admin, can show the entire website (include : can show employee list + delete function).
 If sales, only profile employee.
-3. On progrees (donut chart, ..)
+3. Admin and others have different profile page.
+4-. On progrees ( donut chart, - bar chart (using chart.js))
