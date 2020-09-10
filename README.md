@@ -6,4 +6,7 @@ JWT &amp; page error 404 ; etc
 - Request on Wednesday : 1. After login redirect into profile page
 2. Only admin who can access department and division pages
 3. After delete a data, do not show the value in the table
-- Request on Thrusday : not yet
+- Request on Thrusday : 1. Added Employee
+2. Added profile / role. If the role's admin, can show the entire website.
+If sales, only profile employee.
+3. On progrees (donut chart, ..)
