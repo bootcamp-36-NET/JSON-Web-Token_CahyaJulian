@@ -11,7 +11,7 @@
 		data: validate
     }).then((result) => {
         if (result.status == true) {
-			window.location.href = "/dashboard";
+			window.location.href = "/profile";
 		} else {
 			toastr.warning(result.msg)
 		}
@@ -65,7 +65,7 @@ function Verify() {
     }).then((result) => {
         //window.location.href = "/dashboard";
         if (result.status == true) {
-            window.location.href = "/dashboard";
+            window.location.href = "/profile";
         } else {
             toastr.warning(result.msg)
         }

@@ -100,3 +100,5 @@ C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.dll
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.pdb
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.genruntimeconfig.cache
+C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\Razor\Controllers\Profile.cshtml.g.cs
+C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\Razor\Views\AccountAuth\Profile.cshtml.g.cs

@@ -39,6 +39,11 @@ namespace WebApp.Controllers
         {
             return View();
         }
+        [Route("profile")]
+        public IActionResult Profile()
+        {
+            return View();
+        }
         [Route("verify/post")]
         public IActionResult VerifCode(User userVM)
         {
@@ -176,7 +181,7 @@ namespace WebApp.Controllers
                 }
                 else
                 {
-                    return Json(new { status = false, msg = "Something went wrong" });
+                    return Json(new { status = false, msg = "Something went wrong. Please try again" });
                 }
             }
             return Redirect("/register");

@@ -107,10 +107,10 @@ var formDepartment = {
                 $.ajax({
                     url: '/DepartmentWeb/Delete/' + id,
                     //data: { id: id }
-                    method: 'delete'
+                    type: 'post'
                 }).then((result) => {
                     debugger;
-                    if (result.statusCode == 200) {
+                    if (result.statusCode == 200 || result.statusCode == 201) {
                         Swal.fire({
                             position: 'center',
                             icon: 'success',

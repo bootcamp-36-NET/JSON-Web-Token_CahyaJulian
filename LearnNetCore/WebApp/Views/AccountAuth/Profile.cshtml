@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Http
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "~/Views/Layout/Layout.cshtml";
+    var userId = Context.Session.GetString("id");
+    var uname = Context.Session.GetString("uname");
+    var mail = Context.Session.GetString("email");
+    var level = Context.Session.GetString("lvl");
+    if (mail == null)
+    {
+        Context.Response.Redirect("/login");
+    }
+}
+
+<h1>Profile</h1>
+<div class="modal-body">
+    <form id="form-division" role="form">
+        <input name="id" type="hidden" />
+        <div class="form-group">
+            <label>Id : </label>
+            <span class="table">@userId</span>
+        </div>
+        <div class="form-group">
+            <label> Username : </label>
+            <span class="table">@uname</span>
+        </div>
+        <div class="form-group">
+            <label> Email : </label>
+            <span class="table">@mail</span>
+        </div>
+        <div class="form-group">
+            <label>Jabatan : </label>
+            <span class="table">@level</span>
+        </div>
+
+    </form>
+</div>
+@section scriptdbAdmin{
+
+    <script type="text/javascript"></script>
+}
+

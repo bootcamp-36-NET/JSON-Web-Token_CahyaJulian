@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -26,20 +27,48 @@ namespace WebApp.Controllers
         };
         public JsonResult LoadDivision()
         {
-            IEnumerable<Division> division = null;
+
             //var token = HttpContext.Session.GetString("JWToken");
             //httpClient.DefaultRequestHeaders.Add("Authorization", token);
-            var restTask = httpClient.GetAsync("division");
-            restTask.Wait();
+            var jwt = HttpContext.Request.Headers["Authorization"];
+            //var token2 = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(jwt).Claims.Where(p => p.Type == "RoleName").Select(s => s.Value).FirstOrDefault();
+            //var handler = new JwtSecurityTokenHandler().ReadJwtToken(token2);
+            //var account = new UserViewModel
+            //{
+            //RoleName = token2.Claims.Where(p => p.Type == "RoleName").Select(s => s.Value).FirstOrDefault()
 
-            var result = restTask.Result;
-            if (result.IsSuccessStatusCode)
+            //};
+            var token2 = new System.IdentityModel.Tokens.Jwt.JwtSecurityToken(jwt).Claims.Where(p => p.Type == "RoleName").Select(s => s.Value).FirstOrDefault();
+            if (token2 == "Admin")
             {
-                var readTask = result.Content.ReadAsAsync<IList<Division>>();
-                readTask.Wait();
-                division = readTask.Result;
+                IEnumerable<Division> division = null;
+                var restTask = httpClient.GetAsync("division");
+                restTask.Wait();
+
+                var result = restTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IList<Division>>();
+                    readTask.Wait();
+                    division = readTask.Result;
+                }
+                return Json(division, new Newtonsoft.Json.JsonSerializerSettings());
             }
-            return Json(division, new Newtonsoft.Json.JsonSerializerSettings());
+            return Json(new { msg = "You don't have authorization." });
+            //IEnumerable<Division> division = null;
+            //var token = HttpContext.Session.GetString("JWToken");
+            //httpClient.DefaultRequestHeaders.Add("Authorization", token);
+            //var restTask = httpClient.GetAsync("division");
+            //restTask.Wait();
+
+            //var result = restTask.Result;
+            //if (result.IsSuccessStatusCode)
+            //{
+            //    var readTask = result.Content.ReadAsAsync<IList<Division>>();
+            //    readTask.Wait();
+            //    division = readTask.Result;
+            //}
+            //return Json(division, new Newtonsoft.Json.JsonSerializerSettings());
         }
         public JsonResult InsertorupdateDivision(Division divisionVMs, int id)
         {
@@ -85,7 +114,7 @@ namespace WebApp.Controllers
             }
             else
             {
-                ModelState.AddModelError(string.Empty, "Server Error try after sometimes.");
+                ModelState.AddModelError(string.Empty, "Server Error. Please try again later");
             }
 
             return Json(divisionVMs, new Newtonsoft.Json.JsonSerializerSettings());
