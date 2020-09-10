@@ -11,14 +11,12 @@ namespace LearnNetCore.Models
     public class Employee
     {
         public string Id { get; set; }
-        public string Name { get; set; }
+        public string UserName { get; set; }
         public string Phone { get; set; }
-        public string Address { get; set; }
         public DateTimeOffset CreateDate { get; set; }
         public DateTimeOffset DeleteDate { get; set; }
         public DateTimeOffset UpdateDate { get; set; }
         public bool isDelete { get; set; }
-        //public string UserId { get; set; }
         public User Users { get; set; }
     }
 }

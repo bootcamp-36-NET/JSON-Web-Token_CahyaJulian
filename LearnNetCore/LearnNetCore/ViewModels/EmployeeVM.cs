@@ -9,11 +9,9 @@ namespace LearnNetCore.ViewModels
     {
         public string EmployeeId { get; set; }
 
-        public string EmployeeName { get; set; }
+        public string Username { get; set; }
 
         public string Phone { get; set; }
-
-        public string Address { get; set; }
 
         public DateTimeOffset CreateDate { get; set; }
 

@@ -16,11 +16,11 @@ namespace LearnNetCore.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
+        //private readonly IConfiguration _configuration;
         private readonly MyContext _context;
-        public EmployeesController(MyContext myContext, IConfiguration configuration)
+        public EmployeesController(MyContext myContext)
         {
-            this._configuration = configuration;
+            //this._configuration = configuration;
             this._context = myContext;
         }
         [HttpGet]
@@ -33,8 +33,7 @@ namespace LearnNetCore.Controllers
                 EmployeeVM emp = new EmployeeVM()
                 {
                     EmployeeId = employee.Users.Id,
-                    EmployeeName = employee.Users.UserName,
-                    Address = employee.Address,
+                    Username = employee.Users.UserName,
                     Phone = employee.Users.PhoneNumber,
                     CreateDate = employee.CreateDate,
                     UpdateDate = employee.UpdateDate,
@@ -52,8 +51,7 @@ namespace LearnNetCore.Controllers
             EmployeeVM emp = new EmployeeVM()
             {
                 EmployeeId = getData.Users.Id,
-                EmployeeName = getData.Users.UserName,
-                Address = getData.Address,
+                Username = getData.Users.UserName,
                 Phone = getData.Users.PhoneNumber,
                 CreateDate = getData.CreateDate,
                 UpdateDate = getData.UpdateDate,

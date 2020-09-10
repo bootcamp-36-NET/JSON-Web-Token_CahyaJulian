@@ -22,11 +22,11 @@ namespace WebApp.Controllers
         {
             BaseAddress = new Uri("https://localhost:44380/api/")
         };
-        public JsonResult LoadDivision()
+        public IActionResult LoadDivision()
         {
             IEnumerable<EmployeeVM> employee = null;
-            var token = HttpContext.Session.GetString("JWToken");
-            httpClient.DefaultRequestHeaders.Add("Authorization", token);
+            //var token = HttpContext.Session.GetString("JWToken");
+            //httpClient.DefaultRequestHeaders.Add("Authorization", token);
             var restTask = httpClient.GetAsync("employees");
             restTask.Wait();
 
@@ -39,11 +39,11 @@ namespace WebApp.Controllers
             }
             return Json(employee, new Newtonsoft.Json.JsonSerializerSettings());
         }
-        public JsonResult GetById(int id)
+        public IActionResult GetById(int id)
         {
             EmployeeVM employ = null;
-            var token = HttpContext.Session.GetString("JWToken");
-            httpClient.DefaultRequestHeaders.Add("Authorization", token);
+            //var token = HttpContext.Session.GetString("JWToken");
+            //httpClient.DefaultRequestHeaders.Add("Authorization", token);
             var resTask = httpClient.GetAsync("employees/" + id);
             resTask.Wait();
             var result = resTask.Result;
@@ -59,7 +59,7 @@ namespace WebApp.Controllers
 
             return Json(employ, new Newtonsoft.Json.JsonSerializerSettings());
         }
-        public JsonResult Delete(int id)
+        public IActionResult Delete(int id)
         {
             var token = HttpContext.Session.GetString("JWToken");
             httpClient.DefaultRequestHeaders.Add("Authorization", token);

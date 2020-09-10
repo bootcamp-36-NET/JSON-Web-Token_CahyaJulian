@@ -26,9 +26,8 @@
                                 }
                             },
                             { title: "ID", data: "EmployeeId" },
-                            { title: "Name", data: "EmployeeName" },
+                            { title: "Name", data: "Username" },
                             { title: "Phone", data: "Phone" },
-                            { title: "Address", data: "Address" },
                             {
                                 title: "Create Date",
                                 data: "CreateDate",

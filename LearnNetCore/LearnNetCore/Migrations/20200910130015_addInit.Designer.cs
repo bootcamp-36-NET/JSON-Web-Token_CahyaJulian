@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LearnNetCore.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20200910074954_addError")]
-    partial class addError
+    [Migration("20200910130015_addInit")]
+    partial class addInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -71,17 +71,15 @@ namespace LearnNetCore.Migrations
                 {
                     b.Property<string>("Id");
 
-                    b.Property<string>("Address");
-
                     b.Property<DateTimeOffset>("CreateDate");
 
                     b.Property<DateTimeOffset>("DeleteDate");
 
-                    b.Property<string>("Name");
-
                     b.Property<string>("Phone");
 
                     b.Property<DateTimeOffset>("UpdateDate");
+
+                    b.Property<string>("UserName");
 
                     b.Property<bool>("isDelete");
 

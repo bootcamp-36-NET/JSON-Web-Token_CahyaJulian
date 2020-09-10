@@ -69,17 +69,15 @@ namespace LearnNetCore.Migrations
                 {
                     b.Property<string>("Id");
 
-                    b.Property<string>("Address");
-
                     b.Property<DateTimeOffset>("CreateDate");
 
                     b.Property<DateTimeOffset>("DeleteDate");
 
-                    b.Property<string>("Name");
-
                     b.Property<string>("Phone");
 
                     b.Property<DateTimeOffset>("UpdateDate");
+
+                    b.Property<string>("UserName");
 
                     b.Property<bool>("isDelete");
 
