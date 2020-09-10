@@ -11,5 +11,6 @@ namespace LearnNetCore.Models
     public class User : IdentityUser
     {
         public ICollection<UserRole> UserRoles { get; set; }
+        public Employee Employees { get; set; }
     }
 }

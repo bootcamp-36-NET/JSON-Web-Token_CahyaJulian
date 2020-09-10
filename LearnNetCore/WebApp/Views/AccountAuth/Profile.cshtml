@@ -11,32 +11,69 @@
         Context.Response.Redirect("/login");
     }
 }
+@if (level == "Admin")
+{
+    <h1>Admin Profile</h1>
+    <div class="modal-body">
+        <form id="form-division" role="form">
+            <input name="id" type="hidden" />
+            <div class="form-group">
+                <label>Id : </label>
+                <span class="table">@userId</span>
+            </div>
+            <div class="form-group">
+                <label> Username : </label>
+                <span class="table">@uname</span>
+            </div>
+            <div class="form-group">
+                <label> Email : </label>
+                <span class="table">@mail</span>
+            </div>
+            <div class="form-group">
+                <label>Jabatan : </label>
+                <span class="table">@level</span>
+            </div>
 
-<h1>Profile</h1>
-<div class="modal-body">
-    <form id="form-division" role="form">
-        <input name="id" type="hidden" />
-        <div class="form-group">
-            <label>Id : </label>
-            <span class="table">@userId</span>
-        </div>
-        <div class="form-group">
-            <label> Username : </label>
-            <span class="table">@uname</span>
-        </div>
-        <div class="form-group">
-            <label> Email : </label>
-            <span class="table">@mail</span>
-        </div>
-        <div class="form-group">
-            <label>Jabatan : </label>
-            <span class="table">@level</span>
-        </div>
+        </form>
+    </div>
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
 
-    </form>
-</div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="MydataTable" width="100%" cellspacing="0"></table>
+        </div>
+    </div>
+}
+else
+{
+    <h1>Employee Profile</h1>
+    <div class="modal-body">
+        <form id="form-division" role="form">
+            <input name="id" type="hidden" />
+            <div class="form-group">
+                <label>Id : </label>
+                <span class="table">@userId</span>
+            </div>
+            <div class="form-group">
+                <label> Username : </label>
+                <span class="table">@uname</span>
+            </div>
+            <div class="form-group">
+                <label> Email : </label>
+                <span class="table">@mail</span>
+            </div>
+            <div class="form-group">
+                <label>Jabatan : </label>
+                <span class="table">@level</span>
+            </div>
+
+        </form>
+    </div>
+}
 @section scriptdbAdmin{
-
+    <script src="~/js/ClientJS/EmployeeJS.js"></script>
     <script type="text/javascript"></script>
 }
 

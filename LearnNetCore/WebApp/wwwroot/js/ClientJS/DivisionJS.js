@@ -1,4 +1,4 @@
-﻿var tableDivision = {
+﻿var tableEmployee = {
     create: function () {
         //debugger;
         // jika table tersebut datatable, maka clear and dostroy
@@ -79,7 +79,7 @@ var editDiv;
 $("#btn-edit").click(function () {
     formDivision.editSaveDivision(editDiv);
 });
-tableDivision.create();
+tableEmployee.create();
 
 var formDivision = {
     //Create
@@ -118,7 +118,7 @@ var formDivision = {
             //data: JSON.stringify(dataDivision),
             success: function (res, status, xhr) {
                 if (xhr.status == 200 || xhr.status == 201) {
-                    tableDivision.create();
+                    tableEmployee.create();
                     //tableDivision.ajax.reload(null, false);
                     toastr.success('Data has been saved');
                     $('#exampleModalCenter').modal('hide');
@@ -152,7 +152,7 @@ var formDivision = {
                             showConfirmButton: false,
                             timer: 1500,
                         });
-                        tableDivision.create();
+                        tableEmployee.create();
                     } else {
                         Swal.fire('Error', 'Failed', 'error');
                     }
@@ -178,7 +178,7 @@ var formDivision = {
             data: JSON.stringify(myData),
             success: function (res, status, xhr) {
                 if (xhr.status == 200 || xhr.status == 201) {
-                    tableDivision.create();
+                    tableEmployee.create();
                     $('#exampleModalCenter').modal('hide');
                     toastr.success('Data has been modified.');
                 } else {

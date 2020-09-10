@@ -16,6 +16,7 @@ namespace LearnNetCore.Context
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<Department> departments { get; set; }
         public DbSet<Division> divisions { get;set; }
+        public DbSet<Employee> employees { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -31,6 +32,11 @@ namespace LearnNetCore.Context
                 .HasOne(ur => ur.Role)
                 .WithMany(c => c.UserRoles)
                 .HasForeignKey(ur => ur.RoleId);
+            
+            builder.Entity<User>()
+                .HasOne<Employee>(s => s.Employees)
+                .WithOne(ad => ad.Users)
+                .HasForeignKey<Employee>(ad => ad.Id);
 
             base.OnModelCreating(builder);
         }

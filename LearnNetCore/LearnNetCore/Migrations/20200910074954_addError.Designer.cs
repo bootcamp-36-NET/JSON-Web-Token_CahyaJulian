@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LearnNetCore.Migrations
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20200909101606_addnew")]
-    partial class addnew
+    [Migration("20200910074954_addError")]
+    partial class addError
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,6 +65,29 @@ namespace LearnNetCore.Migrations
                     b.HasIndex("DepartmentId");
 
                     b.ToTable("divisions");
+                });
+
+            modelBuilder.Entity("LearnNetCore.Models.Employee", b =>
+                {
+                    b.Property<string>("Id");
+
+                    b.Property<string>("Address");
+
+                    b.Property<DateTimeOffset>("CreateDate");
+
+                    b.Property<DateTimeOffset>("DeleteDate");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<DateTimeOffset>("UpdateDate");
+
+                    b.Property<bool>("isDelete");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("employees");
                 });
 
             modelBuilder.Entity("LearnNetCore.Models.Role", b =>
@@ -139,6 +162,14 @@ namespace LearnNetCore.Migrations
                     b.HasOne("LearnNetCore.Models.Department", "Department")
                         .WithMany()
                         .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("LearnNetCore.Models.Employee", b =>
+                {
+                    b.HasOne("LearnNetCore.Models.User", "Users")
+                        .WithOne("Employees")
+                        .HasForeignKey("LearnNetCore.Models.Employee", "Id")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
