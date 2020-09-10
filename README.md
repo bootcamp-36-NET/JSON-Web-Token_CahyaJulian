@@ -1,5 +1,5 @@
 # JSON-Web-Token
-JWT &amp; page error 404
+JWT &amp; page error 404 ; etc
 - added CRUD with jwt in department table
 - added moment.js
 - added division
