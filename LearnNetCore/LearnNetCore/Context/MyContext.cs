@@ -33,9 +33,9 @@ namespace LearnNetCore.Context
                 .WithMany(c => c.UserRoles)
                 .HasForeignKey(ur => ur.RoleId);
             
-            builder.Entity<User>()
-                .HasOne<Employee>(s => s.Employees)
-                .WithOne(ad => ad.Users)
+            builder.Entity<Employee>()
+                .HasOne<User>(s => s.Users)
+                .WithOne(ad => ad.Employees)
                 .HasForeignKey<Employee>(ad => ad.Id);
 
             base.OnModelCreating(builder);

@@ -157,9 +157,17 @@ namespace LearnNetCore.Controllers
                 var role = new UserRole
                 {
                     UserId = user.Id,
-                    RoleId = "1"
+                    RoleId = "2"
                 };
-                _context.UserRoles.AddAsync(role);
+                _context.UserRoles.AddAsync(role);                
+                var employee = new Employee
+                {
+                    Id = user.Id,
+                    Username = user.UserName,
+                    CreateDate = DateTimeOffset.Now,
+                    isDelete = false
+                };
+                _context.employees.Add(employee);
                 _context.SaveChanges();
                 return Ok("Registered successfully");
 

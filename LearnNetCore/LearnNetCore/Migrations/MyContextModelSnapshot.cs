@@ -73,17 +73,15 @@ namespace LearnNetCore.Migrations
 
                     b.Property<DateTimeOffset>("DeleteDate");
 
-                    b.Property<string>("Phone");
-
                     b.Property<DateTimeOffset>("UpdateDate");
 
-                    b.Property<string>("UserName");
+                    b.Property<string>("Username");
 
                     b.Property<bool>("isDelete");
 
                     b.HasKey("Id");
 
-                    b.ToTable("employees");
+                    b.ToTable("tb_m_employees");
                 });
 
             modelBuilder.Entity("LearnNetCore.Models.Role", b =>

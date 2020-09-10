@@ -7,12 +7,11 @@ using System.Threading.Tasks;
 
 namespace LearnNetCore.Models
 {
-    [Table("employees")]
-    public class Employee
+    [Table("tb_m_employees")]
+    public class Employee 
     {
         public string Id { get; set; }
-        public string UserName { get; set; }
-        public string Phone { get; set; }
+        public string Username { get; set; }
         public DateTimeOffset CreateDate { get; set; }
         public DateTimeOffset DeleteDate { get; set; }
         public DateTimeOffset UpdateDate { get; set; }

@@ -26,7 +26,7 @@
                                 }
                             },
                             { title: "ID", data: "EmployeeId" },
-                            { title: "Name", data: "Username" },
+                            { title: "Username", data: "Username" },
                             { title: "Phone", data: "Phone" },
                             {
                                 title: "Create Date",
@@ -49,7 +49,7 @@
                                 }
                             },
                             { title: "Deleted Date", data: "DeleteDate" },
-                            { title: "isDelete", data: "isDelete" },
+                            //{ title: "isDelete", data: "isDelete" },
                             {
                                 title: "Action", data: null, "paging": false,
                                 "ordering": false,
@@ -74,6 +74,7 @@ tableEmployee.create();
 
 var formDivision = {
     setDeleteData: function (id) {
+        debugger;
         Swal.fire({
             title: 'Confirmation',
             text: "Do you want to delete this data?",

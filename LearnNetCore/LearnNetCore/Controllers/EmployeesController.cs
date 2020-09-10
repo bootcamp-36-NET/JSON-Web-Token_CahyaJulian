@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using LearnNetCore.Configuration;
 using LearnNetCore.Context;
-using LearnNetCore.Models;
 using LearnNetCore.ViewModels;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,11 +16,11 @@ namespace LearnNetCore.Controllers
     [ApiController]
     public class EmployeesController : ControllerBase
     {
-        //private readonly IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
         private readonly MyContext _context;
-        public EmployeesController(MyContext myContext)
+        public EmployeesController(MyContext myContext, IConfiguration configuration)
         {
-            //this._configuration = configuration;
+            this._configuration = configuration;
             this._context = myContext;
         }
         [HttpGet]
@@ -67,7 +67,7 @@ namespace LearnNetCore.Controllers
                 var getData = _context.employees.Include("Users").SingleOrDefault(x => x.Id == id);
                 if (getData == null)
                 {
-                    return BadRequest("Not Seccessfully");
+                    return BadRequest("Please try again. Delete canceled.");
                 }
 
                 getData.DeleteDate = DateTimeOffset.Now;
@@ -76,9 +76,9 @@ namespace LearnNetCore.Controllers
 
                 _context.Entry(getData).State = EntityState.Modified;
                 _context.SaveChanges();
-                return Ok("Successfully Delete");
+                return Ok("Deleted successfully");
             }
-            return Ok("Delete Failed");
+            return Ok("Failed");
 
         }
     }

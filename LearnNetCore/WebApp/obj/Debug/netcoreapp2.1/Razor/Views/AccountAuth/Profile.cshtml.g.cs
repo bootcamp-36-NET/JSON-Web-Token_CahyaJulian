@@ -84,7 +84,7 @@ using Microsoft.AspNetCore.Http;
             WriteLiteral("    <h1>Admin Profile</h1>\r\n    <div class=\"modal-body\">\r\n        ");
             EndContext();
             BeginContext(506, 707, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "288eaa9f98854952b0f9d0e0ce328da2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "31cc63aa12a243fa8caf6bab9ac3c0ad", async() => {
                 BeginContext(543, 161, true);
                 WriteLiteral("\r\n            <input name=\"id\" type=\"hidden\" />\r\n            <div class=\"form-group\">\r\n                <label>Id : </label>\r\n                <span class=\"table\">");
                 EndContext();
@@ -161,7 +161,7 @@ else
             WriteLiteral("    <h1>Employee Profile</h1>\r\n    <div class=\"modal-body\">\r\n        ");
             EndContext();
             BeginContext(1638, 707, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8caaf6de4b64083b5a68de660573577", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "21b5cbe4874a418fa4dac939c35ebac8", async() => {
                 BeginContext(1675, 161, true);
                 WriteLiteral("\r\n            <input name=\"id\" type=\"hidden\" />\r\n            <div class=\"form-group\">\r\n                <label>Id : </label>\r\n                <span class=\"table\">");
                 EndContext();
@@ -234,7 +234,7 @@ else
                 WriteLiteral("\r\n    ");
                 EndContext();
                 BeginContext(2391, 51, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ba5c287a959d4e648ea1307a58e2ba10", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("script", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ee8a9f030ce041cc9737bb6059f6d1b1", async() => {
                 }
                 );
                 __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();

@@ -52,17 +52,13 @@ namespace WebApp.Controllers
                 var getJson = JsonConvert.DeserializeObject(result.Content.ReadAsStringAsync().Result).ToString();
                 employ = JsonConvert.DeserializeObject<EmployeeVM>(getJson);
             }
-            else
-            {
-                ModelState.AddModelError(string.Empty, "Server Error. Please try again later");
-            }
 
             return Json(employ, new Newtonsoft.Json.JsonSerializerSettings());
         }
         public IActionResult Delete(int id)
         {
-            var token = HttpContext.Session.GetString("JWToken");
-            httpClient.DefaultRequestHeaders.Add("Authorization", token);
+            //var token = HttpContext.Session.GetString("JWToken");
+            //httpClient.DefaultRequestHeaders.Add("Authorization", token);
             var result = httpClient.DeleteAsync("employees/" + id).Result;
             return Json(result);
         }
