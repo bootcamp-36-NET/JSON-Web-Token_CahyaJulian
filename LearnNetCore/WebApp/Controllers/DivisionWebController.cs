@@ -5,17 +5,21 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using LearnNetCore.Context;
 using LearnNetCore.Models;
 using LearnNetCore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+//using System.Data;
 
 namespace WebApp.Controllers
 {
     public class DivisionWebController : Controller
     {
+        private readonly MyContext mycontext;
         public IActionResult Index()
         {
             return View();
@@ -96,6 +100,28 @@ namespace WebApp.Controllers
             httpClient.DefaultRequestHeaders.Add("Authorization", token);
             var result = httpClient.DeleteAsync("division/" + id).Result;
             return Json(result);
+        }
+        public async Task<ActionResult> LoadChar()
+        {
+            var dep = new Division();
+            var date = await mycontext.divisions.Include("Departments").Select(j => j.DepartmentId == dep.DepartmentId).Distinct().ToListAsync();
+            var success = mycontext.divisions
+                .Where(j => j.DepartmentId == 6)
+                .GroupBy(j => j.DepartmentId)
+                .Select(group => new {
+                    Department = group.Key,
+                    Count = group.Count()
+                });
+            var countSuccess = success.Select(a => a.Count).ToArray();
+            var exception = mycontext.divisions
+                .Where(j => j.DepartmentId== 7)
+                .GroupBy(j => j.DepartmentId)
+                .Select(group => new {
+                    Department = group.Key,
+                    Count = group.Count()
+                });
+            var countException = exception.Select(a => a.Count).ToArray();
+            return new JsonResult(new { myDate = date, mySuccess = countSuccess, myException = countException });
         }
     }
 }
