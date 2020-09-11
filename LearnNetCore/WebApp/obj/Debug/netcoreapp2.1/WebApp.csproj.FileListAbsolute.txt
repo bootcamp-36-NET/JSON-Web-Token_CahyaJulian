@@ -50,7 +50,6 @@ C:\Users\User\source\repos\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.ge
 C:\Users\User\source\repos\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\Razor\Views\Shared\ErrorHandler.cshtml.g.cs
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.AssemblyInfoInputs.cache
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.AssemblyInfo.cs
-C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.csproj.CoreCompileInputs.cache
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.RazorAssemblyInfo.cache
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.RazorAssemblyInfo.cs
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\bin\Debug\netcoreapp2.1\appsettings.Development.json
@@ -101,3 +100,4 @@ C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.dll
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.pdb
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.genruntimeconfig.cache
+C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\WebApp.csproj.CoreCompileInputs.cache

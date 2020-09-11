@@ -170,6 +170,10 @@
       "frameworks": {
         "netcoreapp2.1": {
           "dependencies": {
+            "Chart.js": {
+              "target": "Package",
+              "version": "[2.9.3, )"
+            },
             "Microsoft.AspNet.Mvc": {
               "target": "Package",
               "version": "[3.0.20105.1, )"

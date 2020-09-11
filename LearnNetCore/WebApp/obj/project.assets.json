@@ -54,6 +54,9 @@
           "lib/netstandard2.0/BCrypt.Net-Core.dll": {}
         }
       },
+      "Chart.js/2.9.3": {
+        "type": "package"
+      },
       "Microsoft.AspNet.Mvc/3.0.20105.1": {
         "type": "package",
         "dependencies": {
@@ -4993,6 +4996,21 @@
         "lib/netstandard1.3/BCrypt.Net-Core.pdb",
         "lib/netstandard2.0/BCrypt.Net-Core.dll",
         "lib/netstandard2.0/BCrypt.Net-Core.pdb"
+      ]
+    },
+    "Chart.js/2.9.3": {
+      "sha512": "SY8PuXOJANgsEGMtuXPb/gxazfXdySUuFwTPbQUbw/YKiltR6FJ3mXrLFpr6N2MSCS7oUtfOhTotxLifyJcQNA==",
+      "type": "package",
+      "path": "chart.js/2.9.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "chart.js.2.9.3.nupkg.sha512",
+        "chart.js.nuspec",
+        "content/Content/Chart.css",
+        "content/Content/Chart.min.css",
+        "content/Scripts/Chart.js",
+        "content/Scripts/Chart.min.js"
       ]
     },
     "Microsoft.AspNet.Mvc/3.0.20105.1": {
@@ -13175,6 +13193,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
+      "Chart.js >= 2.9.3",
       "LearnNetCore >= 1.0.0",
       "Microsoft.AspNet.Mvc >= 3.0.20105.1",
       "Microsoft.AspNetCore.App >= 2.1.1",
@@ -13227,6 +13246,10 @@
     "frameworks": {
       "netcoreapp2.1": {
         "dependencies": {
+          "Chart.js": {
+            "target": "Package",
+            "version": "[2.9.3, )"
+          },
           "Microsoft.AspNet.Mvc": {
             "target": "Package",
             "version": "[3.0.20105.1, )"

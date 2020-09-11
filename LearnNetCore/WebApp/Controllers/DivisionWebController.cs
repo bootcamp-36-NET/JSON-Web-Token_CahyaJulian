@@ -19,7 +19,6 @@ namespace WebApp.Controllers
 {
     public class DivisionWebController : Controller
     {
-        private readonly MyContext mycontext;
         public IActionResult Index()
         {
             return View();
@@ -101,27 +100,22 @@ namespace WebApp.Controllers
             var result = httpClient.DeleteAsync("division/" + id).Result;
             return Json(result);
         }
-        public async Task<ActionResult> LoadChar()
+        public JsonResult LoadChar()
         {
-            var dep = new Division();
-            var date = await mycontext.divisions.Include("Departments").Select(j => j.DepartmentId == dep.DepartmentId).Distinct().ToListAsync();
-            var success = mycontext.divisions
-                .Where(j => j.DepartmentId == 6)
-                .GroupBy(j => j.DepartmentId)
-                .Select(group => new {
-                    Department = group.Key,
-                    Count = group.Count()
-                });
-            var countSuccess = success.Select(a => a.Count).ToArray();
-            var exception = mycontext.divisions
-                .Where(j => j.DepartmentId== 7)
-                .GroupBy(j => j.DepartmentId)
-                .Select(group => new {
-                    Department = group.Key,
-                    Count = group.Count()
-                });
-            var countException = exception.Select(a => a.Count).ToArray();
-            return new JsonResult(new { myDate = date, mySuccess = countSuccess, myException = countException });
+            Division division = null;
+            var token = HttpContext.Session.GetString("JWToken");
+            httpClient.DefaultRequestHeaders.Add("Authorization", token);
+            var restTask = httpClient.GetAsync("employees/char");
+            restTask.Wait();
+
+            var result = restTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<Division>();
+                readTask.Wait();
+                division = readTask.Result;
+            }
+            return Json(division, new Newtonsoft.Json.JsonSerializerSettings());
         }
     }
 }

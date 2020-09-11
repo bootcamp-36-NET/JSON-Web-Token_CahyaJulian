@@ -65,5 +65,28 @@ namespace LearnNetCore.Controllers
             return Ok("Failed");
 
         }
+        [HttpGet("char")]
+        public async Task<ActionResult> LoadChar()
+        {
+            //var dep = new Division();
+            var data = await _context.divisions.Include("Department").Select(j => j.DepartmentId).Distinct().ToListAsync();
+            var success = _context.divisions
+                .Where(j => j.Department.Name == "Add")
+                .GroupBy(j => j.DepartmentId)
+                .Select(group => new {
+                    Department = group.Key,
+                    Count = group.Count()
+                });
+            var countSuccess = success.Select(a => a.Count).ToArray();
+            var exception = _context.divisions
+                .Where(j => j.Department.Name == "Development")
+                .GroupBy(j => j.DepartmentId)
+                .Select(group => new {
+                    Department = group.Key,
+                    Count = group.Count()
+                });
+            var countException = exception.Select(a => a.Count).ToArray();
+            return new JsonResult(new { myData = data, mySuccess = countSuccess, myException = countException });
+        }
     }
 }

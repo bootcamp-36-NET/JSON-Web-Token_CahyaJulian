@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v2.1": {
       "WebApp/1.0.0": {
         "dependencies": {
+          "Chart.js": "2.9.3",
           "LearnNetCore": "1.0.0",
           "Microsoft.AspNet.Mvc": "3.0.20105.1",
           "Microsoft.AspNetCore.App": "2.1.1",
@@ -99,6 +100,7 @@
           "lib/netstandard2.0/BCrypt.Net-Core.dll": {}
         }
       },
+      "Chart.js/2.9.3": {},
       "Microsoft.AspNet.Mvc/3.0.20105.1": {
         "dependencies": {
           "Microsoft.AspNet.Razor": "1.0.20105.408",
@@ -3860,6 +3862,13 @@
       "sha512": "sha512-hsKiHGjrnlDW05MzuzzlD9gNP8YOW2KbZ+FbvISrilsKJJ76tXKhWey6psZX5sd7DczNpSU2U6ldjPoblk8BLw==",
       "path": "bcrypt.net-core/1.6.0",
       "hashPath": "bcrypt.net-core.1.6.0.nupkg.sha512"
+    },
+    "Chart.js/2.9.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-SY8PuXOJANgsEGMtuXPb/gxazfXdySUuFwTPbQUbw/YKiltR6FJ3mXrLFpr6N2MSCS7oUtfOhTotxLifyJcQNA==",
+      "path": "chart.js/2.9.3",
+      "hashPath": "chart.js.2.9.3.nupkg.sha512"
     },
     "Microsoft.AspNet.Mvc/3.0.20105.1": {
       "type": "package",
