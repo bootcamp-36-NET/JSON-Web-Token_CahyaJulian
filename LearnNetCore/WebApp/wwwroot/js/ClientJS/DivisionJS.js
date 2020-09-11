@@ -9,7 +9,7 @@
             $('#MydataTable').DataTable().destroy();
         }
         $.ajax({
-            url: '/DivisionWeb/LoadDivision',
+            url: '/DivisionWeb/LoadDivision/',
             type: 'get',
             contentType: 'application/json',
             success: function (res, status, xhr) {
@@ -63,7 +63,43 @@
                                         "<button class='btn btn-outline-danger' title='Delete' onclick=formDivision.setDeleteData('" + data.Id + "')><i class='fa fa-lg fa-trash'></i></button>"
                                 }
                             }
-                        ]
+                        ],
+                        initComplete: function () {
+                            this.api().columns(2).every(function () {
+                                var column = this;
+                                var select = $('<select><Option value="">All Divisions</Option></select>')
+                                    .appendTo($(column.header()).empty())
+                                    .on('change', function () {
+                                        var val = $.fn.dataTable.util.escapeRegex(
+                                            $(this).val()
+                                        );
+                                        column
+                                            .search(val ? '^' + val + '$' : '', true, false)
+                                            .draw();
+                                    });
+                                column.data().unique().sort().each(function (d, j) {
+                                    select.append('<option value ="' + d + '">' + d + '<option>')
+                                });
+                            });
+                        },
+                        //initComplete: function () {
+                        //    this.api().columns(3).every(function () {
+                        //        var column = this;
+                        //        var select = $('<select><Option value="">All Departments</Option></select>')
+                        //            .appendTo($(column.header()).empty())
+                        //            .on('change', function () {
+                        //                var val = $.fn.dataTable.util.escapeRegex(
+                        //                    $(this).val()
+                        //                );
+                        //                column
+                        //                    .search(val ? '^' + val + '$' : '', true, false)
+                        //                    .draw();
+                        //            });
+                        //        column.data().unique().sort().each(function (d, j) {
+                        //            select.append('<option value ="' + d + '">' + d + '<option>')
+                        //        });
+                        //    });
+                        //}
                     });
                 } else {
                 }

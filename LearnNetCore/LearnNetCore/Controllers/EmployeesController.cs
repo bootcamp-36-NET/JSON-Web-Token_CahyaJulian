@@ -74,7 +74,7 @@ namespace LearnNetCore.Controllers
                 .Where(j => j.Department.Name == "Add")
                 .GroupBy(j => j.DepartmentId)
                 .Select(group => new {
-                    Department = group.Key,
+                    DepartmentId = group.Key,
                     Count = group.Count()
                 });
             var countSuccess = success.Select(a => a.Count).ToArray();
@@ -82,7 +82,7 @@ namespace LearnNetCore.Controllers
                 .Where(j => j.Department.Name == "Development")
                 .GroupBy(j => j.DepartmentId)
                 .Select(group => new {
-                    Department = group.Key,
+                    DepartmentId = group.Key,
                     Count = group.Count()
                 });
             var countException = exception.Select(a => a.Count).ToArray();
