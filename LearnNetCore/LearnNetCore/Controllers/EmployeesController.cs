@@ -66,7 +66,7 @@ namespace LearnNetCore.Controllers
 
         }
         [HttpGet("char")]
-        public async Task<ActionResult> LoadChar()
+        public async Task<List<ChartVM>> LoadChar()
         {
             //var dep = new Division();
             var data = await _context.divisions.Include("Department").Select(j => j.DepartmentId).Distinct().ToListAsync();
@@ -77,7 +77,7 @@ namespace LearnNetCore.Controllers
                     DepartmentId = group.Key,
                     Count = group.Count()
                 });
-            var countSuccess = success.Select(a => a.Count).ToArray();
+            var countSuccess = success.Select(a => a.Count).ToList();
             var exception = _context.divisions
                 .Where(j => j.Department.Name == "Development")
                 .GroupBy(j => j.DepartmentId)
@@ -85,8 +85,25 @@ namespace LearnNetCore.Controllers
                     DepartmentId = group.Key,
                     Count = group.Count()
                 });
-            var countException = exception.Select(a => a.Count).ToArray();
-            return new JsonResult(new { myData = data, mySuccess = countSuccess, myException = countException });
+            var countException = exception.Select(a => a.Count).ToList();
+            //var total = new ChartVM
+            //{
+            //    CountA = countSuccess.First(),
+            //    CountB = countException.First()
+            //};
+            List<ChartVM> list = new List<ChartVM>();
+            //foreach (var employee in data)
+            //{
+                var total = new ChartVM
+                {
+                    CountA = countSuccess.First(),
+                    CountB = countException.First()
+                };
+                list.Add(total);
+        //}
+            return list;
+            //return new JsonResult(new { myData = data, mySuccess = countSuccess, myException = countException });
+            //return new JsonResult(total);
         }
     }
 }

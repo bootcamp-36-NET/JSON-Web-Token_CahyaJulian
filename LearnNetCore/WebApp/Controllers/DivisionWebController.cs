@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using OfficeOpenXml;
+using WebApp.Report;
 //using System.Data;
 
 namespace WebApp.Controllers
@@ -102,20 +104,121 @@ namespace WebApp.Controllers
         }
         public JsonResult LoadChar()
         {
-            Division division = null;
-            var token = HttpContext.Session.GetString("JWToken");
-            httpClient.DefaultRequestHeaders.Add("Authorization", token);
+            IEnumerable<ChartVM> chart = null;
+            //var token = HttpContext.Session.GetString("JWToken");
+            //httpClient.DefaultRequestHeaders.Add("Authorization", token);
             var restTask = httpClient.GetAsync("employees/char");
             restTask.Wait();
 
             var result = restTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<Division>();
+                var readTask = result.Content.ReadAsAsync<IList<ChartVM>>();
+                readTask.Wait();
+                chart = readTask.Result;
+            }
+            return Json(chart, new Newtonsoft.Json.JsonSerializerSettings());
+            //return new JsonResult(chart);
+        }
+        public IActionResult ReportDivision()
+        {
+            DivisionReport divisionReport = new DivisionReport();
+            List<Division> divisions = new List<Division>();
+            var token = HttpContext.Session.GetString("JWToken");
+            httpClient.DefaultRequestHeaders.Add("Authorization", token);
+            var restTask = httpClient.GetAsync("division");
+            restTask.Wait();
+
+            var result = restTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<List<Division>>();
+                readTask.Wait();
+                divisions = readTask.Result;
+            }
+
+            byte[] abyte = divisionReport.PrepareReport(divisions);
+            return File(abyte, "application/pdf");
+
+        }
+        //public List<Division> GetDivisions()
+        //{
+        //    List<Division> divisions = new List<Division>();
+        //    Division division = new Division();
+        //    foreach(var item in divisions)
+        //    {
+        //        Division division1 = new Division();
+        //        division1.Name = "Division " + item.Name;
+        //        division1.CreateDate = item.CreateDate;
+
+        //        divisions.Add(division1);
+        //    }
+        //    return divisions;
+
+        //}
+
+        public IActionResult ReportExcel()
+        {
+            IEnumerable<Division> division = null;
+            var token = HttpContext.Session.GetString("JWToken");
+            httpClient.DefaultRequestHeaders.Add("Authorization", token);
+            var restTask = httpClient.GetAsync("division");
+            restTask.Wait();
+
+            var res = restTask.Result;
+            if (res.IsSuccessStatusCode)
+            {
+                var readTask = res.Content.ReadAsAsync<List<Division>>();
                 readTask.Wait();
                 division = readTask.Result;
             }
-            return Json(division, new Newtonsoft.Json.JsonSerializerSettings());
+
+            var comlumHeadrs = new string[]
+            {
+                "No",
+                "Id",
+                "Division Name",
+                "Department Name",
+                "Create Date",
+                "Update Date"
+            };
+
+            byte[] result;
+
+            using (var package = new ExcelPackage())
+            {
+                // add a new worksheet to the empty workbook
+
+                var worksheet = package.Workbook.Worksheets.Add("Current Division"); //Worksheet name
+                using (var cells = worksheet.Cells[1, 1, 1, 5]) //(1,1) (1,5)
+                {
+                    cells.Style.Font.Bold = true;
+                }
+
+                //First add the headers
+                for (var i = 0; i < comlumHeadrs.Count(); i++)
+                {
+                    worksheet.Cells[1, i + 1].Value = comlumHeadrs[i];
+                }
+
+                //Add values
+                var number = 1;
+                var j = 2;
+                foreach (var divisions in division)
+                {
+                    worksheet.Cells["A" + j].Value = number++.ToString();
+                    worksheet.Cells["B" + j].Value = divisions.Id;
+                    worksheet.Cells["C" + j].Value = divisions.Name;
+                    worksheet.Cells["D" + j].Value = divisions.Department.Name;
+                    worksheet.Cells["E" + j].Value = divisions.CreateDate.ToString("MM/dd/yyyy");
+                    worksheet.Cells["F" + j].Value = divisions.UpdateDate.ToString("MM/dd/yyyy");
+
+                    j++;
+                }
+                result = package.GetAsByteArray();
+            }
+
+            return File(result, "application/ms-excel", $"Division.xlsx");
         }
     }
 }

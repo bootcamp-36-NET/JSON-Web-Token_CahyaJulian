@@ -103,8 +103,14 @@
                 url: '/DivisionWeb/LoadChar',
                 //async: false,
                 contentType: "application/json",
-                success: function (data) {
-                    resp.push(data);
+                success: function (chart) {
+                    debugger;
+                    resp.push(chart);
+                    //var ch =  {
+                    //    countA = data.countA,
+                    //    CountB = data.CountB
+                    //};
+                    //return ch;
                 },
                 error: function (req, status, error) {
                     alert("error");
@@ -112,16 +118,18 @@
             });
             return resp;
         }
-        var simpleData = GetJSON_Simple();
+        //var CountA = chart[0].CountA();
+        //var CountB = chart[0].CountB();
         var ctx = document.getElementById('myChart');
+        var chart = GetJSON_Simple();
         var myChart = new Chart(ctx, {
             type: 'bar',
             data: {
                 labels: ['Add', 'Development'],
                 datasets: [{
                     label: "CHART",
-                    data: [simpleData[0].mySuccess, simpleData[0].myException],
-                    //data: [92, 10, 0],
+                    //data: [chart[0].CountA, chart[0].CountB],
+                    data: [3, 7],
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',

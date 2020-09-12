@@ -15,6 +15,10 @@
             success: function (res, status, xhr) {
                 if (xhr.status == 200 || xhr.status == 201) {
                     $('#MydataTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'csv', 'excel', 'pdf', 'print'
+                        ],
                         data: res,
                         //"paging": false,
                         //"ordering": false,
@@ -54,20 +58,24 @@
                             { title: "Deleted Date", data: "DeleteDate" },
                             { title: "isDelete", data: "isDelete" },
                             {
-                                title: "Action", data: null, "paging": false,
-                                "ordering": false,
-                                "info": false,
+                                title: "Action", data: null,
+                                //"paging": false,
+                                //"ordering": false,
+                                "sortable": false,
+                                //"info": false,
                                 render: function (data, type, row) {
-                                    console.log(data);
-                                    return "<button class='btn btn-outline-warning' title='delete' onclick=formDivision.setEditData('" + data.Id + "')><i class='fa fa-lg fa-edit'></i></button>" +
-                                        "<button class='btn btn-outline-danger' title='Delete' onclick=formDivision.setDeleteData('" + data.Id + "')><i class='fa fa-lg fa-trash'></i></button>"
+                                    //console.log(data);
+                                    return "<button class='btn btn-outline-warning' data-placement = 'left' title='Edit' onclick=formDivision.setEditData('" + data.Id + "')><i class='fa fa-lg fa-edit'></i></button>"
+                                       + "&nbsp;" + 
+                                        "<button class='btn btn-outline-danger' data-placement = 'right' title='Delete' onclick=formDivision.setDeleteData('" + data.Id + "')><i class='fa fa-lg fa-trash'></i></button>"
+                                
                                 }
                             }
                         ],
                         initComplete: function () {
-                            this.api().columns(2).every(function () {
+                            this.api().columns(3).every(function () {
                                 var column = this;
-                                var select = $('<select><Option value="">All Divisions</Option></select>')
+                                var select = $('<select><Option value="">All Departments</Option></select>')
                                     .appendTo($(column.header()).empty())
                                     .on('change', function () {
                                         var val = $.fn.dataTable.util.escapeRegex(
