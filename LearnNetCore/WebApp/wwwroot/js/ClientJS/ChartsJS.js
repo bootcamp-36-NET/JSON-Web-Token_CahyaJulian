@@ -1,4 +1,5 @@
-﻿am4core.useTheme(am4themes_animated);
+﻿
+am4core.useTheme(am4themes_animated);
 
 var Pie = am4core.createFromConfig({
     "innerRadius": "50%",

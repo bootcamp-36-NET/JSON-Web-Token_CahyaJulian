@@ -140,63 +140,125 @@
 
     <script src="~/js/ClientJS/ChartsJS.js"></script>
     <script>
-        function GetJSON_Simple() {
-            var resp = [];
+$(document).ready(function () {
             $.ajax({
-                type: "GET",
-                url: '/DivisionWeb/LoadChar',
-                async: false,
-                contentType: "application/json",
-                success: function (chart) {
-                    //debugger;
-                    resp.push(chart);
-                    //var ch =  {
-                    //    countA = data.countA,
-                    //    CountB = data.CountB
-                    //};
-                    //return ch;
+                url: "/dashboard/LoadPie",
+                method: "GET",
+                dataType: 'JSON',
+                success: function (data) {
+                    console.log(data);
+                    var hasilA = [];
+                    var hasilB = [];
+
+                    for (var i in data) {
+                        hasilA.push(data[i].DepartmentName);
+                        hasilB.push(data[i].total);
+                    }
+
+                    var chartdata = {
+                        labels: ['Add', 'Development'],
+                        datasets: [
+                            {
+                                label: 'Values',
+                                //backgroundColor: 'rgba(200, 200, 200, 0.75)',
+                                //borderColor: 'rgba(200, 200, 200, 0.75)',
+                                //hoverBackgroundColor: 'rgba(200, 200, 200, 1)',
+                                //hoverBorderColor: 'rgba(200, 200, 200, 1)',
+                                data: Object.values(hasilB),
+                            }
+                        ]
+                    };
+
+                    var ctx = $("#myChart");
+
+                    var barGraph = new Chart(ctx, {
+                        type: 'bar',
+                        data: chartdata,
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1,
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero: true
+                                    }
+                                }]
+                            }
+                        }
+                    });
                 },
-                error: function (req, status, error) {
-                    alert("error");
+                error: function (data) {
+                    console.log(data);
                 }
             });
-            return resp;
-        }
-        //var CountA = chart[0].CountA();
-        //var CountB = chart[0].CountB();
-        var ctx = document.getElementById('myChart');
-        var chart = GetJSON_Simple();
-        var myChart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Add', 'Development'],
-                datasets: [{
-                    label: "All Divisions (active & inactive)",
-                    //data: [chart[0].CountA, chart[0].CountB],
-                    data: [3, 7],
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)'
-                    ],
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
         });
+
+//function GetJSON_Simple() {
+//    var resp = [];
+//    $.ajax({
+//        type: "GET",
+//        url: '/DivisionWeb/LoadChar',
+//        async: false,
+//        contentType: "application/json",
+//        success: function (chart) {
+//            //debugger;
+//            resp.push(chart);
+//            //var ch =  {
+//            //    countA = data.countA,
+//            //    CountB = data.CountB
+//            //};
+//            //return ch;
+//        },
+//        error: function (req, status, error) {
+//            alert("error");
+//        }
+//    });
+//    return resp;
+//}
+////var CountA = chart[0].CountA();
+////var CountB = chart[0].CountB();
+//var ctx = document.getElementById('myChart');
+//var chart = GetJSON_Simple();
+//var myChart = new Chart(ctx, {
+//    type: 'bar',
+//    data: {
+//        labels: ['Add', 'Development'],
+//        datasets: [{
+//            label: "All Divisions (active & inactive)",
+//            //data: [chart[0].CountA, chart[0].CountB],
+//            data: [3, 7],
+//            backgroundColor: [
+//                'rgba(255, 99, 132, 0.2)',
+//                'rgba(54, 162, 235, 0.2)',
+//                'rgba(255, 206, 86, 0.2)'
+//            ],
+//            borderColor: [
+//                'rgba(255, 99, 132, 1)',
+//                'rgba(54, 162, 235, 1)',
+//                'rgba(255, 206, 86, 1)'
+//            ],
+//            borderWidth: 1
+//        }]
+//    },
+//    options: {
+//        scales: {
+//            yAxes: [{
+//                ticks: {
+//                    beginAtZero: true
+//                }
+//            }]
+//        }
+//    }
+//});
     </script>
 }
 
