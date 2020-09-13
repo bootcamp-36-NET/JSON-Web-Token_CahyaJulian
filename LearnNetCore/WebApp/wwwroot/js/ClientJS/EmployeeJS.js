@@ -47,11 +47,12 @@
 
                                 }
                             },
-                            { title: "Deleted Date", data: "DeleteDate" },
+                            //{ title: "Deleted Date", data: "DeleteDate" },
                             //{ title: "isDelete", data: "isDelete" },
                             {
                                 title: "Action", data: null, "paging": false,
                                 "ordering": false,
+                                "sortable": false,
                                 "info": false,
                                 render: function (data, type, row) {
                                     console.log(data);

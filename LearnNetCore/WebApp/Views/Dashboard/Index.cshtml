@@ -84,6 +84,44 @@
         </div>
     </div>
     <canvas id="myChart" width="400" height="400"></canvas>
+    <div class="row">
+
+        <!-- Donut Chart -->
+        <div class="col-lg-12">
+            <div class="card ">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header ">
+                    <h6 class="m-0 font-weight-bold text-primary">Pie Chart Department</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="amChart" id="pieChart"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Donut Chart -->
+        <div class="col-lg-12">
+            <div class="card ">
+                <!-- Card Header - Dropdown -->
+                <div class="card-header ">
+                    <h6 class="m-0 font-weight-bold text-primary">Bar Chart Department</h6>
+                </div>
+                <!-- Card Body -->
+                <div class="card-body">
+                    <div class="col-md-12">
+                        <div class="amChart" id="barChart"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
 </div>
 
 <!-- Content Row -->
@@ -95,16 +133,22 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js" integrity="sha256-arMsf+3JJK2LoTGqxfnuJPFTU4hAK57MtIPdFpiHXOU=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css" integrity="sha256-aa0xaJgmK/X74WM224KMQeNQC2xYKwlAt08oZqjeF0E=" crossorigin="anonymous" />
 
+
+    <script src="~/amcharts4/core.js"></script>
+    <script src="~/amcharts4/charts.js"></script>
+    <script src="~/amcharts4/themes/animated.js"></script>
+
+    <script src="~/js/ClientJS/ChartsJS.js"></script>
     <script>
         function GetJSON_Simple() {
             var resp = [];
             $.ajax({
                 type: "GET",
                 url: '/DivisionWeb/LoadChar',
-                //async: false,
+                async: false,
                 contentType: "application/json",
                 success: function (chart) {
-                    debugger;
+                    //debugger;
                     resp.push(chart);
                     //var ch =  {
                     //    countA = data.countA,
@@ -127,7 +171,7 @@
             data: {
                 labels: ['Add', 'Development'],
                 datasets: [{
-                    label: "CHART",
+                    label: "All Divisions (active & inactive)",
                     //data: [chart[0].CountA, chart[0].CountB],
                     data: [3, 7],
                     backgroundColor: [

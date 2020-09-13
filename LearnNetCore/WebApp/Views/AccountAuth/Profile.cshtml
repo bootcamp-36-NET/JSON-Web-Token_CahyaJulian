@@ -13,27 +13,73 @@
 }
 @if (level == "Admin")
 {
-    <h1>Admin Profile</h1>
-    <div class="modal-body">
-        <form id="form-division" role="form">
-            <input name="id" type="hidden" />
-            <div class="form-group">
-                <label>Id : </label>
-                <span class="table">@userId</span>
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="~/images/profile.jpg" />
+                        @*<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />*@
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5>
+                            @uname.ToUpperInvariant()
+                        </h5>
+                        <h6>
+                            @level.ToUpper()
+                        </h6>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label> Username : </label>
-                <span class="table">@uname</span>
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>User Id</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>@userId</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>User Name</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>@uname</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>@mail</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Profession</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>@level</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label> Email : </label>
-                <span class="table">@mail</span>
-            </div>
-            <div class="form-group">
-                <label>Jabatan : </label>
-                <span class="table">@level</span>
-            </div>
-
         </form>
     </div>
     <div class="card-header py-3">
@@ -48,27 +94,73 @@
 }
 else
 {
-    <h1>Employee Profile</h1>
-    <div class="modal-body">
-        <form id="form-division" role="form">
-            <input name="id" type="hidden" />
-            <div class="form-group">
-                <label>Id : </label>
-                <span class="table">@userId</span>
+    <div class="container emp-profile">
+        <form method="post">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="profile-img">
+                        <img src="~/images/profile.jpg" />
+                        @*<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt="" />*@
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="profile-head">
+                        <h5>
+                            @uname.ToUpperInvariant()
+                        </h5>
+                        <h6>
+                            @level.ToUpper()
+                        </h6>
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label> Username : </label>
-                <span class="table">@uname</span>
+            <div class="row">
+                <div class="col-md-4">
+                </div>
+                <div class="col-md-8">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                        <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>User Id</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>@userId</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>User Name</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>@uname</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Email</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>@mail</p>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Profession</label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p>@level</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="form-group">
-                <label> Email : </label>
-                <span class="table">@mail</span>
-            </div>
-            <div class="form-group">
-                <label>Jabatan : </label>
-                <span class="table">@level</span>
-            </div>
-
         </form>
     </div>
 }

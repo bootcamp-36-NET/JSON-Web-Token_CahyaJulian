@@ -73,8 +73,6 @@ C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\Razor\Views\AccountAuth\Profile.cshtml.g.cs
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\Razor\Views\AccountAuth\Register.cshtml.g.cs
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\Razor\Views\AccountAuth\Verify.cshtml.g.cs
-C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\Razor\Views\Dashboard\Dashboard.cshtml.g.cs
-C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\Razor\Views\Dashboard\Dashboard1.cshtml.g.cs
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\Razor\Views\Dashboard\Index.cshtml.g.cs
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\Razor\Views\DepartmentWeb\Index.cshtml.g.cs
 C:\Users\User\source\repos\LearnNetCore\JSON-Web-Token_CahyaJulian\LearnNetCore\WebApp\obj\Debug\netcoreapp2.1\Razor\Views\DivisionWeb\Index.cshtml.g.cs

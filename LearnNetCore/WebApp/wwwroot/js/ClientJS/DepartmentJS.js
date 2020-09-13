@@ -43,11 +43,11 @@
 
                                 }
                             },
-                            { title: "Deleted Date", data: "DeleteDate" },
-                            { title: "isDelete", data: "isDelete" },
+                            //{ title: "Deleted Date", data: "DeleteDate" },
+                            //{ title: "isDelete", data: "isDelete" },
                             {
-                                title: "Action", data: null, render: function (data, type, row) {
-                                    return "<button class='btn btn-outline-warning' title='delete' onclick=formDepartment.setEditData('" + data.Id + "')><i class='fa fa-lg fa-edit'></i></button>" +
+                                title: "Action", data: null, "sortable": false, render: function (data, type, row) {
+                                    return "<button class='btn btn-outline-warning' title='Edit' onclick=formDepartment.setEditData('" + data.Id + "')><i class='fa fa-lg fa-edit'></i></button>" +
                                         "<button class='btn btn-outline-danger' title='Delete' onclick=formDepartment.setDeleteData('" + data.Id + "')><i class='fa fa-lg fa-trash'></i></button>"
                                 }
                             }

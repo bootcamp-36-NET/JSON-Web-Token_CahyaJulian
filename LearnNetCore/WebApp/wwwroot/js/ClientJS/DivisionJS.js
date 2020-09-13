@@ -17,7 +17,39 @@
                     $('#MydataTable').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copy', 'csv', 'excel', 'pdf', 'print'
+                            {
+                                extend: 'copyHtml5',
+                                text: '<i class="fa fa-file"></i>',
+                                titleAttr: 'Copy',
+                                className: 'btn btn-outline-warning'
+                            },
+                            {
+                                extend: 'csv',
+                                text: '<i class="fa fa-file-csv"></i>',
+                                titleAttr: 'CSV',
+                                className: 'btn btn-outline-info'
+                            },
+                            {
+                                extend: 'excel',
+                                text: '<i class="fa fa-file-excel"></i>',
+                                titleAttr: 'Excel',
+                                filename:'Division List',
+                                className: 'btn btn-outline-success'
+                            },
+                            {
+                                extend: 'pdf',
+                                text: '<i class="fa fa-file-pdf"></i>',
+                                titleAttr: 'Pdf',
+                                className: 'btn btn-outline-danger'
+                            },
+                            {
+                                extend: 'print',
+                                autoPrint: false,
+                                text: '<i class="fa fa-print"></i>',
+                                titleAttr: 'Print',
+                                className: 'btn btn-outline-warning'
+                            },
+
                         ],
                         data: res,
                         //"paging": false,
@@ -55,8 +87,8 @@
 
                                 }
                             },
-                            { title: "Deleted Date", data: "DeleteDate" },
-                            { title: "isDelete", data: "isDelete" },
+                            //{ title: "Deleted Date", data: "DeleteDate" },
+                            //{ title: "isDelete", data: "isDelete" },
                             {
                                 title: "Action", data: null,
                                 //"paging": false,
@@ -89,25 +121,7 @@
                                     select.append('<option value ="' + d + '">' + d + '<option>')
                                 });
                             });
-                        },
-                        //initComplete: function () {
-                        //    this.api().columns(3).every(function () {
-                        //        var column = this;
-                        //        var select = $('<select><Option value="">All Departments</Option></select>')
-                        //            .appendTo($(column.header()).empty())
-                        //            .on('change', function () {
-                        //                var val = $.fn.dataTable.util.escapeRegex(
-                        //                    $(this).val()
-                        //                );
-                        //                column
-                        //                    .search(val ? '^' + val + '$' : '', true, false)
-                        //                    .draw();
-                        //            });
-                        //        column.data().unique().sort().each(function (d, j) {
-                        //            select.append('<option value ="' + d + '">' + d + '<option>')
-                        //        });
-                        //    });
-                        //}
+                        }
                     });
                 } else {
                 }

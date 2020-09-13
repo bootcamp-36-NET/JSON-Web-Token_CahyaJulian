@@ -129,13 +129,13 @@ namespace WebApp.Report
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
                 _pdfPTable.AddCell(_pdfPCell);
 
-                _pdfPCell = new PdfPCell(new Phrase(division.CreateDate.ToString(), _fontStyle));
+                _pdfPCell = new PdfPCell(new Phrase(division.CreateDate.ToString("MM/dd/yyyy"), _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
                 _pdfPTable.AddCell(_pdfPCell);
 
-                _pdfPCell = new PdfPCell(new Phrase(division.UpdateDate.ToString(), _fontStyle));
+                _pdfPCell = new PdfPCell(new Phrase(division.UpdateDate.ToString("MM/dd/yyyy"), _fontStyle));
                 _pdfPCell.HorizontalAlignment = Element.ALIGN_CENTER;
                 _pdfPCell.VerticalAlignment = Element.ALIGN_MIDDLE;
                 _pdfPCell.BackgroundColor = BaseColor.WHITE;
