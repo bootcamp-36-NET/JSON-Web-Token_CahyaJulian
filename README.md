@@ -15,8 +15,8 @@ JWT &amp; page error 404, etc;
 If sales, only profile employee.
 3. Admin and others have different profile page.
 4. Added : 
-~ donut chart,
-~ bar chart (using chart.js)
+~ donut chart (using amchart),
+~ bar chart (using chart.js and amchart)
 
 - Request on Friday:
 1. changed department column into select option
